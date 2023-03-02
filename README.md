@@ -4,3 +4,5 @@
 PLATES - Profile Layering And Telop Editing System
 
 ライブ配信用の編集システム
+
+Team - ティケ イェマン、江川 陽和、髙藤 侑斗、泰本 和輝
