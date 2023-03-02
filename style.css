@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&family=Noto+Sans+JP&family=Noto+Serif+JP&display=swap');
+html {
+    font-size: 10px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.canvasContainer {
+    height: max-content;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-25%) scale(1);
+    box-shadow: 1px 1px 10px black;
+    position: fixed;
+}
+.imagesContainer {
+    display: none;
+}
+/*controllercontainer*/
+.controllerContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 935px;
+    height: 50px;
+    background-color: #666666;
+    border: 3px solid black;
+    padding: 2px 1px;
+    display: flex;
+    font-size: 15px;
+    color: #D8D8D8;
+}
+.Creator {
+    margin: 0px 10px;
+    padding: 3px 10px;
+}
+.objectCreator-select {
+    margin: 0px 5px;
+    width: 120px;
+    height: 30px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+    text-align: center;
+}
+.objectCreator-button {
+    margin: 0px 5px;
+    width: 60px;
+    height: 30px;
+    border: 2px solid black;
+}
+.minimize-btn {
+    margin: 0px 5px;
+    width: 120px;
+    height: 30px;
+    border: 2px solid black;
+}
+.vi {
+    margin: 0px 10px;
+    padding: 3px 10px;
+}
+.canvasScale-input {
+    width: 140px;
+    vertical-align: middle;
+}
+.dispSub-button {
+    margin: 0px 5px;
+    width: 120px;
+    height: 30px;
+    border: 2px solid black;
+}
+.realTime-mode {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+/*SaveAndload*/
+.saveAndloadContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #666666;
+    border: 3px solid black;
+    padding: 5px;
+}
+.profile-select {
+    width: 140px;
+    height: 50px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+.save-button {
+    width: 80px;
+    height: 50px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+.load-button {
+    width: 80px;
+    height: 50px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+.save-file-button {
+    width: 80px;
+    height: 50px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+.load-file-button {
+    width: 80px;
+    height: 50px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+/*ObjectsContainer*/
+.activeObjectsContainer {
+    width: 490px;
+    height: max-content;
+    background-color: #666666;
+    border: 3px solid black;
+    padding: 5px;
+    font-size: 150%;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    margin-top: 10vh;
+}
+.activeObjectsContainer > * {
+    position: relative;
+}
+.layer {
+    background-color: #CCCCCC;
+    height: max-content;
+    margin: 4px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 8px;
+}
+.activeObjectsContainer button:not(.deleteButton) {
+    width: 60px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+.deleteButton {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 30px;
+    height: 25px;
+    border: 1px solid #676666;
+    background-image: url("img/icons/cross.svg");
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.deleteButton:hover {
+    background-image: url("img/icons/crossWhite.svg");
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: red;
+    border: 0px;
+}
+.layerName {
+    width: 130px;
+    height: 55px;
+    margin: 5px;
+    padding: 15px 0;
+    border: 2px solid black;
+    background-color: #F2F2F2;
+    color: black;
+    text-align: center;
+}
+.visButton {
+    width: 60px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+    background-image: url("img/icons/visible.svg");
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.lockButton {
+    width: 60px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+    background-image: url("img/icons/unlocked.svg");
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.upButton {
+    background-image: url("img/icons/up.svg");
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.downButton {
+    background-image: url("img/icons/down.svg");
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.srcButton {
+    background-image: url("img/icons/img.svg");
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.animationSelect {
+    width: 130px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+    text-align: center;
+}
+.runAnimationButton {
+    background-image: url("img/icons/runAnimation.svg");
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.colorInput {
+    width: 60px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+}
+.colorInputHex {
+    width: 60px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    text-align: center;
+    border: 2px solid black;
+}
+.text-content {
+    width: 100%;
+    height: max-content;
+    padding: 5px;
+    padding-bottom: 15px;
+    margin: 5px;
+    border: 2px solid black;
+    overflow-y: hidden;
+}
+.styleSelect {
+    width: 130px;
+    height: 55px;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 2px solid black;
+    text-align: center;
+}
+.visButton:hover, .lockButton:hover, .upButton:hover, .downButton:hover, .runAnimationButton:hover, .deleteButton:hover, .save-button:hover, .load-button:hover, .save-file-button:hover, .load-file-button:hover, .colorInputHex:hover, .objectCreator-button:hover, .minimize-btn:hover, .dispSub-button:hover, .realTime-mode:hover, .btn:hover {
+    opacity: .7;
+}
+.visButton:hover, .lockButton:hover {}
