@@ -1,0 +1,9 @@
+{
+  "name": "plates-overlay-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PLATES live-stream graphics editor",
+  "scripts": {
+    "start": "python3 -m http.server 8765 --bind 127.0.0.1"
+  }
+}

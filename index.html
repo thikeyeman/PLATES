@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PLATES — a browser-based graphics editor for live-stream captions, images, and layered overlays.">
+  <link href="style.css" rel="stylesheet">
+  <link rel="icon" href="img/icons/plates.svg">
+  <script defer src="fabric.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="js/tools/animationController.js"></script>
+  <script defer src="js/tools/textTool.js"></script>
+  <script defer src="js/tools/shapesTool.js"></script>
+  <script defer src="js/tools/imageController.js"></script>
+  <script defer src="js/tools/objectCreator.js"></script>
+  <script defer src="js/sceneData.js"></script>
+  <script defer src="js/tools/saveAndLoad.js"></script>
+  <title>PLATES — Live-stream graphics editor</title>
+</head>
+<body>
+  <input id="image-upload" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/bmp" hidden aria-label="Upload image">
+  <input id="project-upload" type="file" accept=".json,application/json" hidden aria-label="Import project JSON">
+  <header class="appHeader">
+    <div class="brand"><h1>PLATES</h1><p>Profile Layering And Telop Editing System</p><span class="program-status" role="status" aria-live="polite">Program: Cleared</span></div>
+    <div class="outputControls">
+      <button class="take-live-button primary" type="button" title="Publish a validated, independent snapshot of Preview.">Take Live</button>
+      <button class="clear-live-button" type="button" title="Clear Program, keep Preview, and turn realtime off.">Clear Live</button>
+      <label class="outputMode" for="output-background">Output background
+        <select id="output-background" class="output-background" title="Chroma green is opaque. Transparent preserves alpha but may look white in a normal browser window.">
+          <option value="chroma">Chroma green</option>
+          <option value="transparent">Transparent (alpha)</option>
+        </select>
+      </label>
+      <label class="checkboxLabel"><input type="checkbox" class="realTime-mode"> Realtime output</label>
+      <button class="dispSub-button primary" type="button">Open output</button>
+
+    </div>
+  </header>
+  <div class="toolbar">
+    <section class="controllerContainer" aria-label="Create objects">
+      <label for="objectCreator-select">Add object</label>
+      <select id="objectCreator-select" class="objectCreator-select">
+        <option value="text">Text</option>
+        <option value="rect">Rectangle</option>
+        <option value="image">Image</option>
+      </select>
+      <button class="objectCreator-button primary" type="button">Create</button>
+      <button class="example-button" type="button">Load example</button>
+      <button class="clear-button" type="button">Clear canvas</button>
+    </section>
+    <section class="saveAndloadContainer" aria-label="Save and load projects">
+      <label for="profile-select">Local profile</label>
+      <select id="profile-select" class="profile-select">
+        <option value="profile1">Profile 1</option>
+        <option value="profile2">Profile 2</option>
+        <option value="profile3">Profile 3</option>
+      </select>
+      <button class="save-button" type="button">Save</button>
+      <button class="load-button" type="button">Load</button>
+      <span class="toolbarDivider" aria-hidden="true"></span>
+      <button class="save-file-button" type="button">Export JSON</button>
+      <button class="load-file-button" type="button">Import JSON</button>
+    </section>
+  </div>
+  <p id="status" role="status" aria-live="polite">Create a text, rectangle, or image layer to get started. Save a profile or export JSON to keep your work.</p>
+  <main class="workspace">
+    <aside class="layerPanel" aria-labelledby="layers-title">
+      <div class="panelHeading"><h2 id="layers-title">Layers</h2><button class="minimize-btn" type="button" aria-expanded="true" aria-controls="layers">Hide layers</button></div>
+      <p class="panelHint">Top layer appears in front. Drag to move; press Delete on the canvas to remove selected layers.</p>
+      <div id="layers" class="activeObjectsContainer"></div>
+    <div class="selectionTools" aria-label="Selected object controls">
+        <button class="duplicate-button" type="button" title="Duplicate one selected layer (Cmd/Ctrl+D on the canvas).">Duplicate selected</button>
+        <label>Align selected<select class="align-select"><option value="">Choose alignment</option><option value="centerX">Center horizontally</option><option value="centerY">Center vertically</option><option value="left">Canvas left</option><option value="right">Canvas right</option></select></label>
+      </div>
+    </aside>
+    <section class="stage" aria-labelledby="canvas-title">
+      <div class="panelHeading"><h2 id="canvas-title">Preview canvas</h2><span class="canvasMetadata">960 × 540 · Graphics only output</span></div>
+      <div class="canvasViewport">
+        <div class="canvasFrame"><div class="canvasContainer"><video class="demoVideo" muted loop autoplay playsinline preload="metadata" aria-label="City footage preview"></video><canvas class="canvas" aria-label="Graphics editing canvas"></canvas></div></div>
+      </div>
+      <div class="stageFooter">
+        <label for="canvas-scale">Canvas view</label>
+        <input id="canvas-scale" type="range" class="canvasScale-input" min="0.4" max="1" step="0.1" value="1">
+        <output id="canvas-scale-value" for="canvas-scale">Fit</output>
+        <button class="resetAnimations-button" type="button" title="Reset Preview animations; Take Live publishes the reset when realtime is off.">Reset preview animations</button>
+        <label class="checkboxLabel videoToggle"><input type="checkbox" class="video-preview" checked> Video background</label>
+        <span>Preview only · <a href="THIRD_PARTY_NOTICES.md">Footage credit</a></span>
+      </div>
+      <details class="quickGuide"><summary>Quick guide / 使い方</summary><p>Edit the starter layers or use Clear canvas to start fresh. Add an object, edit it in Layers, and drag its canvas handles to resize or rotate. Change Font family in a text layer; select graphics on the canvas and press Delete to remove them. Open output, then use Take Live to broadcast a complete Preview snapshot. Clear Live clears only Program and turns realtime off. Realtime output broadcasts edits immediately; turning it off freezes Program. Play animations in Preview and Take Live while they run to continue them in Program. Video background is for the editor preview only; choose Chroma green for chroma-key capture or Transparent (alpha) for browser-source compositing. Export JSON for a portable backup. Reset animations restores objects to their positions and appearance before playback.</p><p lang="ja">オブジェクトを追加し、レイヤーで内容や表示順を編集します。配信用ウィンドウは「Open output」で開きます。「Export JSON」で編集内容を保存できます。</p></details>
+    </section>
+  </main>
+</body>
+</html>
